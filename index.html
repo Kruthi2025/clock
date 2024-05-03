@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Clock</title>
+<style>
+  #clock {
+    font-family: 'Arial', sans-serif;
+    font-size: 36px;
+    text-align: center;
+    margin-top: 50px;
+  }
+</style>
+</head>
+<body>
+
+<div id="clock"></div>
+
+<script>
+function updateClock() {
+  var now = new Date();
+  var hours = now.getHours();
+  var minutes = now.getMinutes();
+  var seconds = now.getSeconds();
+  var meridiem = "AM";
+
+  // Determine AM or PM
+  if (hours >= 12) {
+    meridiem = "PM";
+  }
+  
+  // Convert to 12-hour format
+  if (hours > 12) {
+    hours -= 12;
+  } else if (hours === 0) {
+    hours = 12;
+  }
+
+  // Add leading zeros to minutes and seconds if they are less than 10
+  minutes = (minutes < 10 ? "0" : "") + minutes;
+  seconds = (seconds < 10 ? "0" : "") + seconds;
+
+  var timeString = hours + ":" + minutes + ":" + seconds + " " + meridiem;
+  
+  document.getElementById('clock').innerText = timeString;
+}
+
+// Call updateClock function every second
+setInterval(updateClock, 1000);
+
+// Run updateClock once when the page loads
+updateClock();
+</script>
+
+</body>
+</html>
